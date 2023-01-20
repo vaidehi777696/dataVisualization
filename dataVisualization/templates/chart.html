@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <script src="path/to/chartjs/dist/chart.umd.js"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      .dwopdwon {
+        text-align: center;
+        width: 150px;
+      }
+      </style>
+    <title>Dashboard</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-dark bg-body-tertiary" style="backgroundColor:#0a3561;">
+      <div class="container">
+        <a class="navbar-brand" style="color : white;" href="#">Visualization Dashboard</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" style="color : white;" aria-current="page" href="#">Home</a>
+            </li>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+    <div class="row mt-3 pt-3">
+      <div class="col-md-4">
+        <div class="border p-3 shadow">
+          <h4>Add Data</h4>
+          <hr>
+          <form method="POST"> {% csrf_token %}
+            <label for="cars">Choose X-axis options:</label>
+            <select class = "dwopdwon mx-3" name="xValues" id="xValues" >
+              <option class = "dwopdwon" value="sector">Sector</option>
+              <option class = "dwopdwon" value="topic">Topic</option>
+              <option class = "dwopdwon" value="region">Region</option>
+              <option class = "dwopdwon" value="source">Source</option>
+              <option class = "dwopdwon" value="end_year">End_year</option>
+              <option class = "dwopdwon" value="end_year">Start_year</option>
+              <option class = "dwopdwon" value="intensity">Intensity</option>
+              <option class = "dwopdwon" value="likelihood">Likelihood</option>
+              <option class = "dwopdwon" value="pestle">Pestle</option>
+              <option class = "dwopdwon" value="relevance">Relevance</option>
+              <option class = "dwopdwon" value="country">Country</option>
+            </select>
+            <br><br>
+            <label for="cars">Choose Y-axis option:</label>
+            <select class = "dwopdwon mx-3" name="yValues" id="yValues" >
+              <option class = "dwopdwon" value="sector">Sector</option>
+              <option class = "dwopdwon" value="topic">Topic</option>
+              <option class = "dwopdwon" value="region">Region</option>
+              <option class = "dwopdwon" value="source">Source</option>
+              <option class = "dwopdwon" value="intensity">Intensity</option>
+              <option class = "dwopdwon" value="likelihood">Likelihood</option>
+              <option class = "dwopdwon" value="pestle">Pestle</option>
+              <option class = "dwopdwon" value="relevance">Relevance</option>
+              <option class = "dwopdwon" value="country">Country</option>
+            </select>
+            <br><br>
+            <input type="submit" value="Submit">
+          </form>
+        </div>
+        <div class="col-md-8">
+        </div>
+    </div>
+
+    {{xaxis}}
+     <hr>
+    {{yaxis}}
+    <hr>
+    {{withnullvalue}}
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+      }
+      .chartMenu {
+        width: 100vw;
+        height: 40px;
+        background: #1A1A1A;
+        color: rgba(54, 162, 235, 1);
+      }
+      .chartMenu p {
+        padding: 10px;
+        font-size: 20px;
+      }
+      .chartCard {
+        width: 100vw;
+        height: calc(100vh - 40px);
+        background: rgba(54, 162, 235, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .chartBox {
+        width: 700px;
+        padding: 20px;
+        border-radius: 20px;
+        border: solid 3px rgba(54, 162, 235, 1);
+        background: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="chartMenu">
+      
+    </div>
+    <div class="chartCard">
+      <div class="chartBox">
+        <canvas id="myChart"></canvas>
+      </div>
+    </div>
+    <script>
+    // setup 
+    const data = {
+      labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'] ,
+      datasets: [{
+        label: 'Weekly Sales',
+        data: [18, 12, 6, 9, 12, 3, 9],                                         {% comment %}`{% for item in yaxis %} {{item}}, {% endfor %}` `{% for item in xaxis %} {{item}}, {% endfor %}` {% endcomment %}
+        backgroundColor: [
+          'rgba(255, 26, 104, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(0, 0, 0, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 26, 104, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+          'rgba(0, 0, 0, 1)'
+        ],
+        borderWidth: 1
+      }]
+    };
+
+    // config 
+    const config = {
+      type: 'bar',
+      data,
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    };
+
+    // render init block
+    const myChart = new Chart(
+      document.getElementById('myChart'),
+      config
+    );
+    </script>
+    
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
+
+{% comment %} `Count of '{{yaxis}}' by {{xaxis}}` {% endcomment %}
+{% comment %} [51,63,25,61,25,36,96,85,80,25,58,69,47,58,63,41,25,85,96,74,55,66,33,44,22,85,88,99,77,52,28] {% endcomment %}
+{% comment %} ["Italy", "France", "Spain", "USA", "Argentina","prasanna","priya","shilpa","pk","ram","indis","jay","kumar","raje","saheb","maharaj","patil","kumbhare","sir"] {% endcomment %}
