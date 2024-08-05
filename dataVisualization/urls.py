@@ -2,5 +2,6 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('',views.fun,name='datafun')
+    path('', views.index, name='index'),
+    path('chart/', views.chart, name='chart'),
 ]

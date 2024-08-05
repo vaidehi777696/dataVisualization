@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Index Page</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-dark" style="background-color:#0a3561;">
+        <div class="container">
+            <a class="navbar-brand" style="color : white;" href="#">Visualization Dashboard</a>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row mt-3 pt-3">
+            <div class="col-md-12">
+                <div class="border p-3 shadow">
+                    <h4>Add Data</h4>
+                    <hr>
+                    <form action="{% url 'chart' %}" method="POST">
+                        {% csrf_token %}
+                        <label for="xValues">Choose X-axis options:</label>
+                        <select class="dropdown mx-3" name="xValues" id="xValues">
+                            <option value="sector">Sector</option>
+                            <option value="topic">Topic</option>
+                            <option value="region">Region</option>
+                            <option value="source">Source</option>
+                            <option value="end_year">End Year</option>
+                            <option value="start_year">Start Year</option>
+                            <option value="intensity">Intensity</option>
+                            <option value="likelihood">Likelihood</option>
+                            <option value="pestle">Pestle</option>
+                            <option value="relevance">Relevance</option>
+                            <option value="country">Country</option>
+                        </select>
+                        <br><br>
+                        <label for="yValues">Choose Y-axis option:</label>
+                        <select class="dropdown mx-3" name="yValues" id="yValues">
+                            <option value="sector">Sector</option>
+                            <option value="topic">Topic</option>
+                            <option value="region">Region</option>
+                            <option value="source">Source</option>
+                            <option value="intensity">Intensity</option>
+                            <option value="likelihood">Likelihood</option>
+                            <option value="pestle">Pestle</option>
+                            <option value="relevance">Relevance</option>
+                            <option value="country">Country</option>
+                        </select>
+                        <br><br>
+                        <input type="submit" value="Submit">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
